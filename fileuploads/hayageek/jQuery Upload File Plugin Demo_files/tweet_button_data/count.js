@@ -1,1 +1,0 @@
-/**/twttr.receiveCount({"count":26,"url":"http:\/\/hayageek.com\/docs\/jquery-upload-file.php\/"});
