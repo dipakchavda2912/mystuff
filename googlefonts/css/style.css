@@ -1,0 +1,15 @@
+@charset "utf-8";
+*, *:after, *:before {
+    box-sizing: border-box;
+}
+body, *{
+    font-family: "Source Sans Pro",sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+section{
+    float:left;
+    width:200px;
+    margin:20px
+}
