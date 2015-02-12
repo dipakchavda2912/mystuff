@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><script async="" src="jQuery%20Upload%20File%20Plugin%20Demo_files/cbgapi.loaded_1"></script><script async="" src="jQuery%20Upload%20File%20Plugin%20Demo_files/cbgapi.loaded_0"></script><script src="jQuery%20Upload%20File%20Plugin%20Demo_files/ga.js" async="" type="text/javascript"></script>
+    <meta charset="utf-8">
+    <title>jQuery Upload File Plugin Demo</title>
+    <meta name="description" content="jQuery Upload File Plugin Demo- How to upload Multiple Files asynchronously(using jQuery Ajax) with progressbar">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta property="og:locale" content="en_US">    
+	<link rel="author" href="https://plus.google.com/+RavishankerKusuma">    
+    <link href="jQuery%20Upload%20File%20Plugin%20Demo_files/bootstrap.css" rel="stylesheet">
+    <link href="jQuery%20Upload%20File%20Plugin%20Demo_files/uploadfile.css" rel="stylesheet">
+    <style>
+    .highlight {
+  display: none; /* hidden by default, until >480px */
+  padding: 9px 14px;
+  margin-bottom: 14px;
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+  border-radius: 4px;
+}
+.highlight pre {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-color: transparent;
+  border: 0;
+  white-space: nowrap;
+}
+.highlight pre code {
+  font-size: inherit;
+  color: #333; /* Effectively the base text color */
+}
+.highlight pre .lineno {
+  display: inline-block;
+  width: 22px;
+  padding-right: 5px;
+  margin-right: 10px;
+  text-align: right;
+  color: #bebec5;
+}
+
+/* Show code snippets when we have the space */
+@media screen and (min-width: 481px) {
+  .highlight {
+    display: block;
+  }
+}
+</style>
+<script src="jQuery%20Upload%20File%20Plugin%20Demo_files/ca-pub-0923466578214929.js" type="text/javascript" async=""></script><script type="text/javascript">
+(function(){
+  var bsa = document.createElement('script');
+     bsa.type = 'text/javascript';
+     bsa.async = true;
+     bsa.src = 'http://s3.buysellads.com/ac/bsa.js';
+  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+})();
+</script><script src="jQuery%20Upload%20File%20Plugin%20Demo_files/bsa.js" async="" type="text/javascript"></script>
+<script async="" src="jQuery%20Upload%20File%20Plugin%20Demo_files/adsbygoogle.js"></script>
+  <script async="async" src="jQuery%20Upload%20File%20Plugin%20Demo_files/s_19097822778565d7c7d1cc1bcb8feb6a.js" id="_bsap_js_19097822778565d7c7d1cc1bcb8feb6a" type="text/javascript"></script><style id="bsa_css" type="text/css">div.bsap_1289820{width:100%;display:block}div.bsap_1289820 a{width:728px}div.bsap_1289820 a img{padding:0}div.bsap_1289820 a em{font-style:normal}div.bsap_1289820 a{display:block;font-size:11px;color:#888;font-family:verdana,sans-serif;margin:0;text-align:center;text-decoration:none;overflow:hidden;float:left;}div.bsap_1289820 img{border:0;clear:right;}div.bsap_1289820 a.adhere{color:#666;font-weight:bold;font-size:12px;border:1px solid #ccc;background:#e7e7e7;text-align:center;}div.bsap_1289820 a.adhere:hover{border:1px solid #999;background:#ddd;color:#333;}div.bsap_1289820 iframe{display:block;font-size:11px;color:#888;font-family:verdana,sans-serif;margin:0;text-align:center;text-decoration:none;overflow:hidden;float:left;}div.bsap_1289820 a{line-height:100%}div.bsap_1289820 a.adhere{width:728px;height:90px;line-height:720%}html>body div.bsap_1289820 a.adhere{width:726px;height:88px}div.bsap_1289820 img.s{height:0;width:0}</style><link href="jQuery%20Upload%20File%20Plugin%20Demo_files/prettify.css" type="text/css" rel="stylesheet"><script src="jQuery%20Upload%20File%20Plugin%20Demo_files/embed.js" async="" type="text/javascript"></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f6f7f8;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3a5795;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #2f477a;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f8;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style><script charset="UTF-8" async="" src="jQuery%20Upload%20File%20Plugin%20Demo_files/alfie.js"></script></head>
+
+  <body data-twttr-rendered="true">
+ <div class="navbar navbar-fixed-top">
+   <div class="navbar-inner">
+     <div class="container">
+       <a data-original-title="Github - jQuery Upload File" rel="tooltip" title="" class="brand" target="__blank" href="https://github.com/hayageek/jquery-upload-file/">Github</a>
+       <a data-original-title="Download Source &amp; Examples" rel="tooltip" title="" class="brand" target="__blank" href="http://hayageek.com/examples/jquery/jquery-multiple-file-upload/zips/jQuery-File-Upload.zip">Download</a>       
+       <div class="nav-collapse collapse" id="main-menu">
+        <ul class="nav" id="main-menu-left">
+          <li><a data-original-title="Hayageek.com Home Page" rel="tooltip" href="http://hayageek.com/" title="">Home</a></li>
+        </ul>
+        <ul class="nav pull-right" id="main-menu-right">
+        <li style="margin-top:15px;margin-right:5px;"><form id="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post"> 
+ <input name="cmd" value="_xclick" type="hidden"> 
+ <input name="business" value="rskusuma@yahoo.com" type="hidden"> 
+ <input name="item_name" value="Support Hayageek.com" type="hidden"> 
+ <input name="buyer_credit_promo_code" value="" type="hidden"> 
+ <input name="buyer_credit_product_category" value="" type="hidden"> 
+ <input name="buyer_credit_shipping_method" value="" type="hidden"> 
+ <input name="buyer_credit_user_address_change" value="" type="hidden"> 
+ <input name="no_shipping" value="0" type="hidden"> 
+ <input name="no_note" value="1" type="hidden"> 
+ <input name="currency_code" value="USD" type="hidden"> 
+ <input name="tax" value="0" type="hidden"> 
+ <input name="lc" value="US" type="hidden"> 
+ <input name="bn" value="PP-DonationsBF" type="hidden"> 
+ <div><input id="butt" src="jQuery%20Upload%20File%20Plugin%20Demo_files/btn_donate_SM.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" border="0" type="image"> </div>
+</form>	</li>
+        <li style="margin-top:15px;margin-right:5px;"><div fb-iframe-plugin-query="app_id=&amp;href=http%3A%2F%2Fhayageek.com%2Fdocs%2Fjquery-upload-file.php&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;send=false&amp;show_faces=false&amp;width=120" fb-xfbml-state="rendered" data-href="http://hayageek.com/docs/jquery-upload-file.php" class="fb-like fb_iframe_widget" data-layout="button_count" data-send="false" data-show-faces="false" data-width="120"><span style="vertical-align: top; width: 0px; height: 0px; overflow: hidden;"><iframe src="jQuery%20Upload%20File%20Plugin%20Demo_files/like.html" style="border: medium none; visibility: visible; width: 0px; height: 0px;" title="fb:like Facebook Social Plugin" scrolling="no" allowtransparency="true" name="fd521a2041a188" frameborder="0" height="1000px" width="120px"></iframe></span></div></li>
+        <li style="margin-top:15px;"><iframe style="width: 106px; height: 20px;" data-twttr-rendered="true" title="Twitter Tweet Button" class="twitter-share-button twitter-tweet-button twitter-share-button twitter-count-horizontal" src="jQuery%20Upload%20File%20Plugin%20Demo_files/tweet_button.html" allowtransparency="true" scrolling="no" id="twitter-widget-0" frameborder="0"></iframe></li>
+        <li style="margin-top:15px;"><div id="___plusone_0" style="position: absolute; width: 450px; left: -10000px;"><iframe src="jQuery%20Upload%20File%20Plugin%20Demo_files/fastbutton.html" name="I0_1417242154503" id="I0_1417242154503" vspace="0" tabindex="0" style="position:absolute;top:-10000px;width:450px;margin:0px;border-style:none" scrolling="no" marginwidth="0" marginheight="0" hspace="0" frameborder="0" width="100%"></iframe></div><div style="text-indent: 0px; margin: 0px; padding: 0px; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 106px; height: 24px;" id="___plusone_2" data-gapistub="true" data-onload="true" data-gapiscan="true" data-href="http://hayageek.com/docs/jquery-upload-file.php" class="g-plusone" data-annotation="inline" data-size="medium" data-width="120"><iframe src="jQuery%20Upload%20File%20Plugin%20Demo_files/fastbutton_002.html" name="I3_1417242154518" id="I3_1417242154518" vspace="0" tabindex="0" style="position: static; top: 0px; width: 106px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 24px;" scrolling="no" marginwidth="0" marginheight="0" hspace="0" frameborder="0" width="100%"></iframe></div></li>
+        <form class="navbar-search pull-left" method="GET" action="http://hayageek.com/search.php">
+            <input size="30" class="search-query" placeholder="Search" name="q" type="text">
+          </form>
+ 
+        </ul>
+ 
+       </div>
+     </div>
+   </div>
+ </div>
+ 
+  <div class="container">
+<br><br>
+<section id="typography">
+  <div class="page-header">
+    <h2>jQuery Upload File Plugin Demo</h2>
+  </div>
+<div style="width:728px;height:95px;">
+<div id="bsap_1289820" class="bsap_1289820 bsap"><a href="https://buysellads.com/buy/detail/209882/zone/1289820?utm_source=site_209882&amp;utm_medium=website&amp;utm_campaign=adhere&amp;utm_content=zone_1289820" title="Advertise Here" class="adhere ad1 odd" target="_blank">Advertise Here</a></div>
+</div>
+
+  <!-- Headings & Paragraph Copy -->
+  <div class="row">
+  
+  <ul class="nav nav-tabs" style="margin-bottom: 15px;">
+                  <li class=""><a href="#start" data-toggle="tab">Getting Started</a></li>
+                <li><a href="#single" title="Single File Upload" data-toggle="tab">Single File Upload</a></li>
+                <li class="active"><a href="#multi" title="Multiple File Upload" data-toggle="tab">Multiple File</a></li>
+                <li><a href="#advanced" title="Advanced File Upload" data-toggle="tab">Advanced</a></li>
+                <li><a href="#events" title="Events File Upload" data-toggle="tab">Events</a></li>
+                <li><a href="#others" data-toggle="tab">Styling</a></li>
+                <li><a href="#doc" data-toggle="tab">API &amp; Options</a></li>
+                <li class=""><a href="#server" data-toggle="tab">Server Side</a></li>
+                
+              </ul>
+              <div id="tabcontent" class="tab-content">
+<div class="tab-pane fade" id="start">
+<p>
+jQuery File UPload plugin provides Multiple file uploads with progress bar.
+jQuery File Upload Plugin depends on <a href="http://malsup.com/jquery/form/">Ajax Form</a> Plugin, So Github contains source code with and without Form plugin.
+</p>
+1). Add the CSS and JS files in the <code>head</code> sections
+
+<pre><code style="" class="prettyprint prettyprinted"><span class="tag">&lt;link</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"http://hayageek.github.io/jQuery-Upload-File/uploadfile.min.css"</span><span class="pln"> </span><span class="atn">rel</span><span class="pun">=</span><span class="atv">"stylesheet"</span><span class="tag">&gt;</span><span class="pln">
+</span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span><span class="pln">
+</span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"http://hayageek.github.io/jQuery-Upload-File/jquery.uploadfile.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span></code></pre>
+
+<br>
+
+2). Add a div to <code>body</code> to handle file uploads
+<pre><code style="" class="prettyprint prettyprinted"><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"fileuploader"</span><span class="tag">&gt;</span><span class="pln">Upload</span><span class="tag">&lt;/div&gt;</span></code></pre>
+
+<br>
+
+3). Initialize the plugin when the <code>document</code> is ready.
+<pre><code style="" class="prettyprint prettyprinted"><span class="tag">&lt;script&gt;</span><span class="pln">
+$</span><span class="pun">(</span><span class="pln">document</span><span class="pun">).</span><span class="pln">ready</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">()</span><span class="pln">
+</span><span class="pun">{</span><span class="pln">
+	$</span><span class="pun">(</span><span class="str">"#fileuploader"</span><span class="pun">).</span><span class="pln">uploadFile</span><span class="pun">({</span><span class="pln">
+	url</span><span class="pun">:</span><span class="str">"YOUR_FILE_UPLOAD_URL"</span><span class="pun">,</span><span class="pln">
+	fileName</span><span class="pun">:</span><span class="str">"myfile"</span><span class="pln">
+	</span><span class="pun">});</span><span class="pln">
+</span><span class="pun">});</span><span class="pln">
+</span><span class="tag">&lt;/script&gt;</span></code></pre>
+<br>
+<b>Thats it.</b>
+jQuery Ajax File uploader with progress bar is ready now.
+
+</div>
+<div class="tab-pane fade" id="single">
+<p> 
+</p><h4>Jquery File Upload </h4>
+Source:
+<pre><code style="" class="prettyprint prettyprinted"><span class="pln">$</span><span class="pun">(</span><span class="str">"#singleupload1"</span><span class="pun">).</span><span class="pln">uploadFile</span><span class="pun">({</span><span class="pln">
+	url</span><span class="pun">:</span><span class="str">"http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php"</span><span class="pln">
+	</span><span class="pun">});</span></code></pre>
+Output:
+<div class="ajax-upload-dragdrop" style="vertical-align:top;"><div style="position: relative; overflow: hidden; cursor: default;" class="ajax-file-upload">Upload<form style="margin: 0px; padding: 0px;" method="POST" action="http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php" enctype="multipart/form-data"><input style="position: absolute; cursor: pointer; top: 0px; width: 120px; height: 25px; left: 0px; z-index: 100; opacity: 0;" id="ajax-upload-id-1417242152655" name="file[]" multiple="" type="file"></form></div><span><b>Drag &amp; Drop Files</b></span></div><div style="display: none;" id="singleupload1">Upload</div><div></div>
+
+<br><br><br>
+
+<h4>Jquery File Upload with File Restrictions</h4>
+Source:
+<pre><code style="" class="prettyprint prettyprinted"><span class="pln">$</span><span class="pun">(</span><span class="str">"#singleupload2"</span><span class="pun">).</span><span class="pln">uploadFile</span><span class="pun">({</span><span class="pln">
+url</span><span class="pun">:</span><span class="str">"http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php"</span><span class="pun">,</span><span class="pln">
+allowedTypes</span><span class="pun">:</span><span class="str">"png,gif,jpg,jpeg"</span><span class="pun">,</span><span class="pln">
+fileName</span><span class="pun">:</span><span class="str">"myfile"</span><span class="pln">
+</span><span class="pun">});</span></code></pre>
+Output:
+<div class="ajax-upload-dragdrop" style="vertical-align:top;"><div style="position: relative; overflow: hidden; cursor: default;" class="ajax-file-upload">Upload<form style="margin: 0px; padding: 0px;" method="POST" action="http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php" enctype="multipart/form-data"><input style="position: absolute; cursor: pointer; top: 0px; width: 120px; height: 25px; left: 0px; z-index: 100; opacity: 0;" id="ajax-upload-id-1417242152659" name="myfile[]" multiple="" type="file"></form></div><span><b>Drag &amp; Drop Files</b></span></div><div style="display: none;" id="singleupload2">Upload</div><div></div>
+
+<p></p>
+</div>
+<div class="tab-pane fade" id="advanced">
+<p>
+</p><h4>Jquery Advanced File Upload </h4>
+Source:
+<pre><code style="" class="prettyprint prettyprinted"><span class="kwd">var</span><span class="pln"> uploadObj </span><span class="pun">=</span><span class="pln"> $</span><span class="pun">(</span><span class="str">"#advancedUpload"</span><span class="pun">).</span><span class="pln">uploadFile</span><span class="pun">({</span><span class="pln">
+url</span><span class="pun">:</span><span class="str">"http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php"</span><span class="pun">,</span><span class="pln">
+multiple</span><span class="pun">:</span><span class="kwd">true</span><span class="pun">,</span><span class="pln">
+autoSubmit</span><span class="pun">:</span><span class="kwd">false</span><span class="pun">,</span><span class="pln">
+fileName</span><span class="pun">:</span><span class="str">"myfile"</span><span class="pun">,</span><span class="pln">
+formData</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="str">"name"</span><span class="pun">:</span><span class="str">"Ravi"</span><span class="pun">,</span><span class="str">"age"</span><span class="pun">:</span><span class="lit">31</span><span class="pun">},</span><span class="pln">
+maxFileSize</span><span class="pun">:</span><span class="lit">1024</span><span class="pun">*</span><span class="lit">100</span><span class="pun">,</span><span class="pln">
+maxFileCount</span><span class="pun">:</span><span class="lit">1</span><span class="pun">,</span><span class="pln">
+dynamicFormData</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln">
+</span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">var</span><span class="pln"> data </span><span class="pun">={</span><span class="pln"> location</span><span class="pun">:</span><span class="str">"INDIA"</span><span class="pun">}</span><span class="pln">
+	</span><span class="kwd">return</span><span class="pln"> data</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">},</span><span class="pln">
+showStatusAfterSuccess</span><span class="pun">:</span><span class="kwd">false</span><span class="pun">,</span><span class="pln">
+dragDropStr</span><span class="pun">:</span><span class="pln"> </span><span class="str">"&lt;span&gt;&lt;b&gt;Faites glisser et déposez les fichiers&lt;/b&gt;&lt;/span&gt;"</span><span class="pun">,</span><span class="pln">
+abortStr</span><span class="pun">:</span><span class="str">"abandonner"</span><span class="pun">,</span><span class="pln">
+cancelStr</span><span class="pun">:</span><span class="str">"résilier"</span><span class="pun">,</span><span class="pln">
+doneStr</span><span class="pun">:</span><span class="str">"fait"</span><span class="pun">,</span><span class="pln">
+multiDragErrorStr</span><span class="pun">:</span><span class="pln"> </span><span class="str">"Plusieurs Drag &amp; Drop de fichiers ne sont pas autorisés."</span><span class="pun">,</span><span class="pln">
+extErrorStr</span><span class="pun">:</span><span class="str">"n'est pas autorisé. Extensions autorisées:"</span><span class="pun">,</span><span class="pln">
+sizeErrorStr</span><span class="pun">:</span><span class="str">"n'est pas autorisé. Admis taille max:"</span><span class="pun">,</span><span class="pln">
+uploadErrorStr</span><span class="pun">:</span><span class="str">"Upload n'est pas autorisé"</span><span class="pln">
+
+</span><span class="pun">});</span><span class="pln">
+$</span><span class="pun">(</span><span class="str">"#startUpload"</span><span class="pun">).</span><span class="pln">click</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">()</span><span class="pln">
+</span><span class="pun">{</span><span class="pln">
+	uploadObj</span><span class="pun">.</span><span class="pln">startUpload</span><span class="pun">();</span><span class="pln">
+</span><span class="pun">});</span></code></pre><br>
+Output:
+<div class="ajax-upload-dragdrop" style="vertical-align:top;"><div style="position: relative; overflow: hidden; cursor: default;" class="ajax-file-upload">Téléchargez<form style="margin: 0px; padding: 0px;" method="POST" action="http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php" enctype="multipart/form-data"><input style="position: absolute; cursor: pointer; top: 0px; width: 120px; height: 25px; left: 0px; z-index: 100; opacity: 0;" id="ajax-upload-id-1417242152663" name="myfile[]" multiple="" type="file"></form></div><span><b>Faites glisser et déposez les fichiers</b></span></div><div style="display: none;" id="advancedUpload">Téléchargez</div><div></div>
+
+<br><br>
+<div id="startUpload" class="ajax-file-upload-green">Start Upload</div>   
+         
+<p></p>
+<br>
+<hr>
+<p>
+</p><h4>Jquery Delete File Option</h4>
+<pre><code style="" class="prettyprint prettyprinted"><span class="pln">$</span><span class="pun">(</span><span class="str">"#deleteFileUpload"</span><span class="pun">).</span><span class="pln">uploadFile</span><span class="pun">({</span><span class="pln">
+ url</span><span class="pun">:</span><span class="pln"> </span><span class="str">"upload.php"</span><span class="pun">,</span><span class="pln">
+ dragDrop</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">,</span><span class="pln">
+ fileName</span><span class="pun">:</span><span class="pln"> </span><span class="str">"myfile"</span><span class="pun">,</span><span class="pln">
+ returnType</span><span class="pun">:</span><span class="pln"> </span><span class="str">"json"</span><span class="pun">,</span><span class="pln">
+ showDelete</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">,</span><span class="pln">
+ deleteCallback</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">data</span><span class="pun">,</span><span class="pln"> pd</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+     </span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> data</span><span class="pun">.</span><span class="pln">length</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+         $</span><span class="pun">.</span><span class="pln">post</span><span class="pun">(</span><span class="str">"delete.php"</span><span class="pun">,</span><span class="pln"> </span><span class="pun">{</span><span class="pln">op</span><span class="pun">:</span><span class="pln"> </span><span class="str">"delete"</span><span class="pun">,</span><span class="pln">name</span><span class="pun">:</span><span class="pln"> data</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]},</span><span class="pln">
+             </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">resp</span><span class="pun">,</span><span class="pln">textStatus</span><span class="pun">,</span><span class="pln"> jqXHR</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+                 </span><span class="com">//Show Message	</span><span class="pln">
+                 alert</span><span class="pun">(</span><span class="str">"File Deleted"</span><span class="pun">);</span><span class="pln">
+             </span><span class="pun">});</span><span class="pln">
+     </span><span class="pun">}</span><span class="pln">
+     pd</span><span class="pun">.</span><span class="pln">statusbar</span><span class="pun">.</span><span class="pln">hide</span><span class="pun">();</span><span class="pln"> </span><span class="com">//You choice.</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+ </span><span class="pun">});</span></code></pre>
+Output: <div class="ajax-upload-dragdrop" style="vertical-align:top;"><div style="position: relative; overflow: hidden; cursor: default;" class="ajax-file-upload">File Upload (Delete)<form style="margin: 0px; padding: 0px;" method="POST" action="upload.php" enctype="multipart/form-data"><input style="position: absolute; cursor: pointer; top: 0px; width: 120px; height: 25px; left: 0px; z-index: 100; opacity: 0;" id="ajax-upload-id-1417242152666" name="myfile[]" multiple="" type="file"></form></div><span><b>Drag &amp; Drop Files</b></span></div><div style="display: none;" id="deleteFileUpload">File Upload (Delete)</div><div></div>
+
+<p></p>
+
+</div>
+ 
+<div class="tab-pane fade active in" id="multi">
+<p>                
+</p><h4>Jquery Multiple File Upload </h4>
+
+Source:
+<pre><code style="" class="prettyprint prettyprinted"><span class="pln">$</span><span class="pun">(</span><span class="str">"#multipleupload"</span><span class="pun">).</span><span class="pln">uploadFile</span><span class="pun">({</span><span class="pln">
+url</span><span class="pun">:</span><span class="str">"http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php"</span><span class="pun">,</span><span class="pln">
+multiple</span><span class="pun">:</span><span class="kwd">true</span><span class="pun">,</span><span class="pln">
+fileName</span><span class="pun">:</span><span class="str">"myfile"</span><span class="pln">
+</span><span class="pun">});</span></code></pre><br>
+Output:
+<div class="ajax-upload-dragdrop" style="vertical-align:top;"><div style="position: relative; overflow: hidden; cursor: default;" class="ajax-file-upload">Upload<form class="" style="margin: 0px; padding: 0px; display: none;" method="POST" action="http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php" enctype="multipart/form-data"><input style="position: absolute; cursor: pointer; top: 0px; width: 120px; height: 25px; left: 0px; z-index: 100; opacity: 0;" id="ajax-upload-id-1417242152661" name="myfile[]" multiple="" type="file"></form><form style="margin: 0px; padding: 0px;" method="POST" action="http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php" enctype="multipart/form-data"><input style="position: absolute; cursor: pointer; top: 0px; width: 55px; height: 25px; left: 0px; z-index: 100; opacity: 0;" id="ajax-upload-id-1417242167581" name="myfile[]" multiple="" type="file"></form></div><span><b>Drag &amp; Drop Files</b></span></div><div style="display: none;" id="multipleupload">Upload</div><div></div>
+<p></p>
+</div>
+
+<div class="tab-pane fade" id="events">
+<p>
+</p><h4>Jquery Upload File Events </h4>
+Source:
+<pre><code style="" class="prettyprint prettyprinted"><span class="pln">$</span><span class="pun">(</span><span class="str">"#eventsupload"</span><span class="pun">).</span><span class="pln">uploadFile</span><span class="pun">({</span><span class="pln">
+url</span><span class="pun">:</span><span class="str">"http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php"</span><span class="pun">,</span><span class="pln">
+multiple</span><span class="pun">:</span><span class="kwd">true</span><span class="pun">,</span><span class="pln">
+fileName</span><span class="pun">:</span><span class="str">"myfile"</span><span class="pun">,</span><span class="pln">
+onSubmit</span><span class="pun">:</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">files</span><span class="pun">)</span><span class="pln">
+</span><span class="pun">{</span><span class="pln">
+	$</span><span class="pun">(</span><span class="str">"#eventsmessage"</span><span class="pun">).</span><span class="pln">html</span><span class="pun">(</span><span class="pln">$</span><span class="pun">(</span><span class="str">"#eventsmessage"</span><span class="pun">).</span><span class="pln">html</span><span class="pun">()+</span><span class="str">"&lt;br/&gt;Submitting:"</span><span class="pun">+</span><span class="pln">JSON</span><span class="pun">.</span><span class="pln">stringify</span><span class="pun">(</span><span class="pln">files</span><span class="pun">));</span><span class="pln">
+</span><span class="pun">},</span><span class="pln">
+onSuccess</span><span class="pun">:</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">files</span><span class="pun">,</span><span class="pln">data</span><span class="pun">,</span><span class="pln">xhr</span><span class="pun">)</span><span class="pln">
+</span><span class="pun">{</span><span class="pln">
+	$</span><span class="pun">(</span><span class="str">"#eventsmessage"</span><span class="pun">).</span><span class="pln">html</span><span class="pun">(</span><span class="pln">$</span><span class="pun">(</span><span class="str">"#eventsmessage"</span><span class="pun">).</span><span class="pln">html</span><span class="pun">()+</span><span class="str">"&lt;br/&gt;Success for: "</span><span class="pun">+</span><span class="pln">JSON</span><span class="pun">.</span><span class="pln">stringify</span><span class="pun">(</span><span class="pln">data</span><span class="pun">));</span><span class="pln">
+	
+</span><span class="pun">},</span><span class="pln">
+afterUploadAll</span><span class="pun">:</span><span class="kwd">function</span><span class="pun">()</span><span class="pln">
+</span><span class="pun">{</span><span class="pln">
+	$</span><span class="pun">(</span><span class="str">"#eventsmessage"</span><span class="pun">).</span><span class="pln">html</span><span class="pun">(</span><span class="pln">$</span><span class="pun">(</span><span class="str">"#eventsmessage"</span><span class="pun">).</span><span class="pln">html</span><span class="pun">()+</span><span class="str">"&lt;br/&gt;All files are uploaded"</span><span class="pun">);</span><span class="pln">
+	
+</span><span class="pun">},</span><span class="pln">
+onError</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">files</span><span class="pun">,</span><span class="pln">status</span><span class="pun">,</span><span class="pln">errMsg</span><span class="pun">)</span><span class="pln">
+</span><span class="pun">{</span><span class="pln">
+	$</span><span class="pun">(</span><span class="str">"#eventsmessage"</span><span class="pun">).</span><span class="pln">html</span><span class="pun">(</span><span class="pln">$</span><span class="pun">(</span><span class="str">"#eventsmessage"</span><span class="pun">).</span><span class="pln">html</span><span class="pun">()+</span><span class="str">"&lt;br/&gt;Error for: "</span><span class="pun">+</span><span class="pln">JSON</span><span class="pun">.</span><span class="pln">stringify</span><span class="pun">(</span><span class="pln">files</span><span class="pun">));</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">});</span></code></pre><br>
+Output:
+<div class="ajax-upload-dragdrop" style="vertical-align:top;"><div style="position: relative; overflow: hidden; cursor: default;" class="ajax-file-upload">Upload<form style="margin: 0px; padding: 0px;" method="POST" action="http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php" enctype="multipart/form-data"><input style="position: absolute; cursor: pointer; top: 0px; width: 120px; height: 25px; left: 0px; z-index: 100; opacity: 0;" id="ajax-upload-id-1417242152668" name="myfile[]" multiple="" type="file"></form></div><span><b>Drag &amp; Drop Files</b></span></div><div style="display: none;" id="eventsupload">Upload</div><div></div>
+<div id="eventsmessage"><b>Events:</b></div>
+<p></p>
+</div>
+
+<div class="tab-pane fade" id="others">
+<p>
+</p><h4>Hide Cancel,Abort,Done Buttons</h4>
+Source:
+<pre><code style="" class="prettyprint prettyprinted"><span class="pln">$</span><span class="pun">(</span><span class="str">"#stylingupload1"</span><span class="pun">).</span><span class="pln">uploadFile</span><span class="pun">({</span><span class="pln">
+url</span><span class="pun">:</span><span class="str">"http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php"</span><span class="pun">,</span><span class="pln">
+multiple</span><span class="pun">:</span><span class="kwd">true</span><span class="pun">,</span><span class="pln">
+fileName</span><span class="pun">:</span><span class="str">"myfile"</span><span class="pun">,</span><span class="pln">
+showStatusAfterSuccess</span><span class="pun">:</span><span class="kwd">false</span><span class="pun">,</span><span class="pln">
+showAbort</span><span class="pun">:</span><span class="kwd">false</span><span class="pun">,</span><span class="pln">
+showDone</span><span class="pun">:</span><span class="kwd">false</span><span class="pun">,</span><span class="pln">
+</span><span class="pun">});</span></code></pre><br>
+Output:
+<div class="ajax-upload-dragdrop" style="vertical-align:top;"><div style="position: relative; overflow: hidden; cursor: default;" class="ajax-file-upload">Upload<form style="margin: 0px; padding: 0px;" method="POST" action="http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php" enctype="multipart/form-data"><input style="position: absolute; cursor: pointer; top: 0px; width: 120px; height: 25px; left: 0px; z-index: 100; opacity: 0;" id="ajax-upload-id-1417242152670" name="myfile[]" multiple="" type="file"></form></div><span><b>Drag &amp; Drop Files</b></span></div><div style="display: none;" id="stylingupload1">Upload</div><div></div>
+
+<br><br><br>
+
+
+<h4>Changing Upload Button style</h4>
+Source:
+<pre><code style="" class="prettyprint prettyprinted"><span class="pln">$</span><span class="pun">(</span><span class="str">"#stylingupload2"</span><span class="pun">).</span><span class="pln">uploadFile</span><span class="pun">({</span><span class="pln">
+url</span><span class="pun">:</span><span class="str">"http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php"</span><span class="pun">,</span><span class="pln">
+multiple</span><span class="pun">:</span><span class="kwd">true</span><span class="pun">,</span><span class="pln">
+fileName</span><span class="pun">:</span><span class="str">"myfile"</span><span class="pun">,</span><span class="pln">
+showStatusAfterSuccess</span><span class="pun">:</span><span class="kwd">false</span><span class="pun">,</span><span class="pln">
+showAbort</span><span class="pun">:</span><span class="kwd">false</span><span class="pun">,</span><span class="pln">
+showDone</span><span class="pun">:</span><span class="kwd">false</span><span class="pun">,</span><span class="pln">
+uploadButtonClass</span><span class="pun">:</span><span class="str">"ajax-file-upload-green"</span><span class="pln">
+</span><span class="pun">});</span></code></pre><br>
+Output:
+<div class="ajax-upload-dragdrop" style="vertical-align:top;"><div style="position: relative; overflow: hidden; cursor: default;" class="ajax-file-upload-green">Upload<form style="margin: 0px; padding: 0px;" method="POST" action="http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php" enctype="multipart/form-data"><input style="position: absolute; cursor: pointer; top: 0px; width: 120px; height: 25px; left: 0px; z-index: 100; opacity: 0;" id="ajax-upload-id-1417242152672" name="myfile[]" multiple="" type="file"></form></div><span><b>Drag &amp; Drop Files</b></span></div><div style="display: none;" id="stylingupload2">Upload</div><div></div>
+
+<p></p>
+</div>
+
+<div class="tab-pane fade" id="doc">
+<h4>jQuery Upload File API</h4> <br>
+
+<p><code><b>uploadFile</b></code><br> Creates Ajax form and uploads the files to server.
+</p><pre><code style="" class="prettyprint prettyprinted"><span class="kwd">var</span><span class="pln"> uploadObj </span><span class="pun">=</span><span class="pln"> $</span><span class="pun">(</span><span class="str">"#uploadDivId"</span><span class="pun">).</span><span class="pln">uploadFile</span><span class="pun">(</span><span class="pln">options</span><span class="pun">);.</span></code></pre><p></p> <br>
+
+<p><code><b>startUpload</b></code><br> uploads all the selected files. This function is used when <code>autoSubmit</code> option is set to <code>false</code>.
+</p><pre><code style="" class="prettyprint prettyprinted"><span class="pln">uploadObj</span><span class="pun">.</span><span class="pln">startUpload</span><span class="pun">();</span></code></pre><p></p> <br>
+
+<hr>
+
+<h4>Options</h4>
+<p><code><b>url</b></code><br> Server URL which handles File uploads <br></p> <br>
+
+<p><code><b>method</b></code><br> Upload Form method type  <code>POST</code> or <code>GET</code>. Default is <code>POST</code></p> <br>
+
+<p><code><b>enctype</b></code><br>  Upload Form enctype. Default is <code>multipart/form-data</code>.</p> <br>
+
+<p><code><b>formData</b></code><br> An object that should be send with file upload. 
+<code>data: { key1: 'value1', key2: 'value2' }</code></p><br>
+<p><code><b>returnType</b></code> <br>
+Expected data type of the response. One of: <code>null</code>, <code>'xml'</code>, <code>'script'</code>, or <code>'json'</code>. The returnType option provides a means for specifying how the server response should be handled. 
+The following values are supported:<br>
+<code>xml</code>: if returnType == 'xml' the server response is treated 
+as XML and the 'success' callback method, if specified, will be passed 
+the responseXML value <br>
+<code>json</code>: if returnType == 'json' the server response will be evaluted and passed to the 'success' callback, if specified <br>
+<code>script</code>: if returnType == 'script' the server response is evaluated in the global context  <br>
+</p><br>
+
+<p><code><b>allowedTypes</b></code> <br>  List of comma separated file extensions. Default is <code>"*"</code>. Example: <code>"jpg,png,gif"</code> </p><br>
+
+<p><code><b>fileName</b></code> <br>  Name of the file input field.Default is <code>file</code></p><br>
+<p><code><b>multiple</b></code> <br>  If it is set to <code>true</code>, multiple file selection is allowed. Default is<code>false</code></p><br>
+<p><code><b>maxFileSize</b></code> <br>  Allowed Maximum file Size in bytes.</p><br>
+<p><code><b>maxFileCount</b></code> <br>  Allowed Maximum number of files to be uploaded .</p><br>
+
+<p><code><b>autoSubmit</b></code> <br>  If it is set to <code>true</code>, files are uploaded automatically. Otherwise you need to call <code>.startUpload</code> function. Default is<code>true</code></p><br>
+<p><code><b>showCancel</b></code> <br>  If it is set to <code>false</code>, Cancel button is hidden when <code>autoSubmit</code> is false. Default is<code>true</code></p><br>
+<p><code><b>showAbort</b></code> <br>  If it is set to <code>false</code>, Abort button is hidden when the upload is in progress. Default is<code>true</code></p><br>
+<p><code><b>showDone</b></code> <br>  If it is set to <code>false</code>, Done button is hidden when the upload is completed. Default is<code>true</code></p><br>
+<p><code><b>showDelete</b></code><br> If it is set to <code>true</code>, Delete button is shown when the upload is completed. Default is<code>false</code>,You need to 
+implement <code>deleteCallback()</code> function.
+
+</p><p><code><b>showProgress</b></code> <br> If it is set to <code>true</code>, Progress precent is shown to user. Default is<code>false</code> </p><br>
+<p><code><b>showFileCounter</b></code> <br>If it is set to <code>true</code>, File counter is shown with name. Default is<code>true</code>File Counter style can be changed using <code>fileCounterStyle</code>. Default is <code>). </code> </p><br>
+
+<p><code><b>showStatusAfterSuccess</b></code> <br>  If it is set to <code>false</code>, status box will be hidden after the upload is done. Default is<code>true</code></p><br>
+
+<p><code><b>onSelect</b></code> <br>  callback back to be invoked when the files are selected or dropped.
+</p><pre><code style="" class="prettyprint prettyprinted"><span class="pln">onSelect</span><span class="pun">:</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">files</span><span class="pun">)</span><span class="pln">
+</span><span class="pun">{</span><span class="pln">
+    files</span><span class="pun">[</span><span class="lit">0</span><span class="pun">].</span><span class="pln">name</span><span class="pun">;</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span><span class="pln"> </span><span class="com">//to allow file submission.</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+<p></p><br>
+
+<p><code><b>onSubmit</b></code> <br>  callback back to be invoked before the file upload.
+</p><pre><code style="" class="prettyprint prettyprinted"><span class="pln">onSubmit</span><span class="pun">:</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">files</span><span class="pun">)</span><span class="pln">
+</span><span class="pun">{</span><span class="pln">
+	</span><span class="com">//files : List of files to be uploaded</span><span class="pln">
+	</span><span class="com">//return false; to stop upload</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+<p></p><br>
+
+<p><code><b>onSuccess</b></code> <br>  callback to be invoked when the upload is successful.
+</p><pre><code style="" class="prettyprint prettyprinted"><span class="pln">onSuccess</span><span class="pun">:</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">files</span><span class="pun">,</span><span class="pln">data</span><span class="pun">,</span><span class="pln">xhr</span><span class="pun">)</span><span class="pln">
+</span><span class="pun">{</span><span class="pln">
+	</span><span class="com">//files: list of files</span><span class="pln">
+	</span><span class="com">//data: response from server</span><span class="pln">
+	</span><span class="com">//xhr : jquer xhr object</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+
+<p><code><b>afterUploadAll</b></code> <br>  callback to be invoked when all the uploads are done.
+</p><pre><code style="" class="prettyprint prettyprinted"><span class="pln">afterUploadAll</span><span class="pun">:</span><span class="kwd">function</span><span class="pun">()</span><span class="pln">
+</span><span class="pun">{</span><span class="pln">
+
+</span><span class="pun">}</span></code></pre>
+
+<p></p><br>
+<p><code><b>onError</b></code> <br>  callback back to be invoked when the upload is failed.
+</p><pre><code style="" class="prettyprint prettyprinted"><span class="pln">onError</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">files</span><span class="pun">,</span><span class="pln">status</span><span class="pun">,</span><span class="pln">errMsg</span><span class="pun">)</span><span class="pln">
+</span><span class="pun">{</span><span class="pln">
+	</span><span class="com">//files: list of files</span><span class="pln">
+	</span><span class="com">//status: error status</span><span class="pln">
+	</span><span class="com">//errMsg: error message</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+<p></p><br>
+<p><code><b>deleteCallback</b></code> <br>  callback  to be invoked when the user clicks on Delete button..
+</p><pre><code style="" class="prettyprint prettyprinted"><span class="pln">deleteCallback</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">data</span><span class="pun">,</span><span class="pln">pd</span><span class="pun">)</span><span class="pln">
+</span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">for</span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> i</span><span class="pun">=</span><span class="lit">0</span><span class="pun">;</span><span class="pln">i</span><span class="pun">&lt;</span><span class="pln">data</span><span class="pun">.</span><span class="pln">length</span><span class="pun">;</span><span class="pln">i</span><span class="pun">++)</span><span class="pln">
+	</span><span class="pun">{</span><span class="pln">
+	 	$</span><span class="pun">.</span><span class="pln">post</span><span class="pun">(</span><span class="str">"delete.php"</span><span class="pun">,{</span><span class="pln">op</span><span class="pun">:</span><span class="str">"delete"</span><span class="pun">,</span><span class="pln">name</span><span class="pun">:</span><span class="pln">data</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]},</span><span class="pln">
+	    </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">resp</span><span class="pun">,</span><span class="pln"> textStatus</span><span class="pun">,</span><span class="pln"> jqXHR</span><span class="pun">)</span><span class="pln">
+	    </span><span class="pun">{</span><span class="pln">
+			</span><span class="com">//Show Message	</span><span class="pln">
+			alert</span><span class="pun">(</span><span class="str">"File Deleted"</span><span class="pun">);</span><span class="pln">	    
+	    </span><span class="pun">});</span><span class="pln">
+	 </span><span class="pun">}</span><span class="pln">		
+	pd</span><span class="pun">.</span><span class="pln">statusbar</span><span class="pun">.</span><span class="pln">hide</span><span class="pun">();</span><span class="pln"> </span><span class="com">//You choice to hide/not.</span><span class="pln">
+
+</span><span class="pun">}</span></code></pre>
+<p></p><br>
+<p><code><b>uploadButtonClass</b></code> <br> Upload Button class. Default is<code>ajax-file-upload</code></p><br>
+</div>
+
+<div class="tab-pane fade" id="server">
+<p>
+</p><h3> PHP code for handling Multiple file uploads </h3>
+upload.php Source:
+<pre><code style="" class="prettyprint prettyprinted"><span class="pun">&lt;?</span><span class="pln">php
+$output_dir </span><span class="pun">=</span><span class="pln"> </span><span class="str">"uploads/"</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">if</span><span class="pun">(</span><span class="pln">isset</span><span class="pun">(</span><span class="pln">$_FILES</span><span class="pun">[</span><span class="str">"myfile"</span><span class="pun">]))</span><span class="pln">
+</span><span class="pun">{</span><span class="pln">
+	$ret </span><span class="pun">=</span><span class="pln"> array</span><span class="pun">();</span><span class="pln">
+
+	$error </span><span class="pun">=</span><span class="pln">$_FILES</span><span class="pun">[</span><span class="str">"myfile"</span><span class="pun">][</span><span class="str">"error"</span><span class="pun">];</span><span class="pln">
+	</span><span class="com">//You need to handle  both cases</span><span class="pln">
+	</span><span class="com">//If Any browser does not support serializing of multiple files using FormData() </span><span class="pln">
+	</span><span class="kwd">if</span><span class="pun">(!</span><span class="pln">is_array</span><span class="pun">(</span><span class="pln">$_FILES</span><span class="pun">[</span><span class="str">"myfile"</span><span class="pun">][</span><span class="str">"name"</span><span class="pun">]))</span><span class="pln"> </span><span class="com">//single file</span><span class="pln">
+	</span><span class="pun">{</span><span class="pln">
+ 	 	$fileName </span><span class="pun">=</span><span class="pln"> $_FILES</span><span class="pun">[</span><span class="str">"myfile"</span><span class="pun">][</span><span class="str">"name"</span><span class="pun">];</span><span class="pln">
+ 		move_uploaded_file</span><span class="pun">(</span><span class="pln">$_FILES</span><span class="pun">[</span><span class="str">"myfile"</span><span class="pun">][</span><span class="str">"tmp_name"</span><span class="pun">],</span><span class="pln">$output_dir</span><span class="pun">.</span><span class="pln">$fileName</span><span class="pun">);</span><span class="pln">
+    	$ret</span><span class="pun">[]=</span><span class="pln"> $fileName</span><span class="pun">;</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+	</span><span class="kwd">else</span><span class="pln">  </span><span class="com">//Multiple files, file[]</span><span class="pln">
+	</span><span class="pun">{</span><span class="pln">
+	  $fileCount </span><span class="pun">=</span><span class="pln"> count</span><span class="pun">(</span><span class="pln">$_FILES</span><span class="pun">[</span><span class="str">"myfile"</span><span class="pun">][</span><span class="str">"name"</span><span class="pun">]);</span><span class="pln">
+	  </span><span class="kwd">for</span><span class="pun">(</span><span class="pln">$i</span><span class="pun">=</span><span class="lit">0</span><span class="pun">;</span><span class="pln"> $i </span><span class="pun">&lt;</span><span class="pln"> $fileCount</span><span class="pun">;</span><span class="pln"> $i</span><span class="pun">++)</span><span class="pln">
+	  </span><span class="pun">{</span><span class="pln">
+	  	$fileName </span><span class="pun">=</span><span class="pln"> $_FILES</span><span class="pun">[</span><span class="str">"myfile"</span><span class="pun">][</span><span class="str">"name"</span><span class="pun">][</span><span class="pln">$i</span><span class="pun">];</span><span class="pln">
+		move_uploaded_file</span><span class="pun">(</span><span class="pln">$_FILES</span><span class="pun">[</span><span class="str">"myfile"</span><span class="pun">][</span><span class="str">"tmp_name"</span><span class="pun">][</span><span class="pln">$i</span><span class="pun">],</span><span class="pln">$output_dir</span><span class="pun">.</span><span class="pln">$fileName</span><span class="pun">);</span><span class="pln">
+	  	$ret</span><span class="pun">[]=</span><span class="pln"> $fileName</span><span class="pun">;</span><span class="pln">
+	  </span><span class="pun">}</span><span class="pln">
+	
+	</span><span class="pun">}</span><span class="pln">
+    echo json_encode</span><span class="pun">(</span><span class="pln">$ret</span><span class="pun">);</span><span class="pln">
+ </span><span class="pun">}</span><span class="pln">
+ </span><span class="pun">?&gt;</span></code></pre><br>
+
+
+<p></p>
+<br>
+delete.php Source code:
+<pre><code style="" class="prettyprint prettyprinted"><span class="pun">&lt;?</span><span class="pln">php
+$output_dir </span><span class="pun">=</span><span class="pln"> </span><span class="str">"uploads/"</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">if</span><span class="pun">(</span><span class="pln">isset</span><span class="pun">(</span><span class="pln">$_POST</span><span class="pun">[</span><span class="str">"op"</span><span class="pun">])</span><span class="pln"> </span><span class="pun">&amp;&amp;</span><span class="pln"> $_POST</span><span class="pun">[</span><span class="str">"op"</span><span class="pun">]</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="str">"delete"</span><span class="pln"> </span><span class="pun">&amp;&amp;</span><span class="pln"> isset</span><span class="pun">(</span><span class="pln">$_POST</span><span class="pun">[</span><span class="str">'name'</span><span class="pun">]))</span><span class="pln">
+</span><span class="pun">{</span><span class="pln">
+	$fileName </span><span class="pun">=</span><span class="pln">$_POST</span><span class="pun">[</span><span class="str">'name'</span><span class="pun">];</span><span class="pln">
+	$filePath </span><span class="pun">=</span><span class="pln"> $output_dir</span><span class="pun">.</span><span class="pln"> $fileName</span><span class="pun">;</span><span class="pln">
+	</span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">file_exists</span><span class="pun">(</span><span class="pln">$filePath</span><span class="pun">))</span><span class="pln"> 
+	</span><span class="pun">{</span><span class="pln">
+        unlink</span><span class="pun">(</span><span class="pln">$filePath</span><span class="pun">);</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+	echo </span><span class="str">"Deleted File "</span><span class="pun">.</span><span class="pln">$fileName</span><span class="pun">.</span><span class="str">"&lt;br&gt;"</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">?&gt;</span></code></pre>
+
+<h3> Server settings for Large file uploads</h3>
+<b>php.ini settings </b>
+<pre><code style="" class="prettyprint prettyprinted"><span class="pln">max_file_uploads </span><span class="pun">=</span><span class="pln"> </span><span class="lit">2000</span><span class="pln">
+upload_max_filesize </span><span class="pun">=</span><span class="pln"> </span><span class="lit">40000M</span><span class="pln">
+max_input_vars </span><span class="pun">=</span><span class="pln"> </span><span class="lit">10000</span><span class="pln">
+post_max_size </span><span class="pun">=</span><span class="pln"> </span><span class="lit">40000M</span></code></pre>
+<br>
+<b>httpd.conf settings</b>   
+ <pre><code style="" class="prettyprint prettyprinted"><span class="pln">php_value suhosin</span><span class="pun">.</span><span class="pln">post</span><span class="pun">.</span><span class="pln">max_vars </span><span class="lit">10000</span><span class="pln">
+php_value suhosin</span><span class="pun">.</span><span class="pln">request</span><span class="pun">.</span><span class="pln">max_vars </span><span class="lit">10000</span><span class="pln">
+php_value suhosin</span><span class="pun">.</span><span class="kwd">get</span><span class="pun">.</span><span class="pln">max_array_depth </span><span class="lit">2000</span><span class="pln">
+php_value suhosin</span><span class="pun">.</span><span class="kwd">get</span><span class="pun">.</span><span class="pln">max_vars </span><span class="lit">10000</span><span class="pln">
+php_value suhosin</span><span class="pun">.</span><span class="pln">upload</span><span class="pun">.</span><span class="pln">max_uploads </span><span class="lit">2000</span></code></pre>   
+</div>
+            
+ </div>
+</div></section>
+
+<br>
+<ins data-adsbygoogle-status="done" class="adsbygoogle" style="display:inline-block;width:970px;height:90px" data-ad-client="ca-pub-0923466578214929" data-ad-slot="6444020521"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:970px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:970px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;" frameborder="0" height="90" width="970"></iframe></ins></ins></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+
+<div class="row">
+<div class="well">
+<b>Please Share it with your friends if you like the plugin:</b><br><br>
+<iframe style="width: 106px; height: 20px;" data-twttr-rendered="true" title="Twitter Tweet Button" class="twitter-share-button twitter-tweet-button twitter-share-button twitter-count-horizontal" src="jQuery%20Upload%20File%20Plugin%20Demo_files/tweet_button_002.html" allowtransparency="true" scrolling="no" id="twitter-widget-1" frameborder="0"></iframe>
+<div id="___plusone_1" style="text-indent: 0px; margin: 0px; padding: 0px; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 120px; height: 20px;"><iframe src="jQuery%20Upload%20File%20Plugin%20Demo_files/fastbutton_003.html" name="I1_1417242154508" id="I1_1417242154508" vspace="0" tabindex="0" style="position: static; top: 0px; width: 120px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" scrolling="no" marginwidth="0" marginheight="0" hspace="0" frameborder="0" width="100%"></iframe></div>
+<div fb-iframe-plugin-query="app_id=&amp;href=http%3A%2F%2Fhayageek.com%2Fdocs%2Fjquery-upload-file.php&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;send=false&amp;show_faces=false&amp;width=120" fb-xfbml-state="rendered" data-href="http://hayageek.com/docs/jquery-upload-file.php" class="fb-like fb_iframe_widget" data-layout="button_count" data-send="false" data-show-faces="false" data-width="120"><span style="vertical-align: top; width: 0px; height: 0px; overflow: hidden;"><iframe src="jQuery%20Upload%20File%20Plugin%20Demo_files/like_002.html" style="border: medium none; visibility: visible; width: 0px; height: 0px;" title="fb:like Facebook Social Plugin" scrolling="no" allowtransparency="true" name="fcdc706e73a158" frameborder="0" height="1000px" width="120px"></iframe></span></div>
+
+<br> <br>
+
+<div id="___person_0" style="position: absolute; width: 450px; left: -10000px;"><iframe src="jQuery%20Upload%20File%20Plugin%20Demo_files/person.html" name="I2_1417242154512" id="I2_1417242154512" vspace="0" tabindex="0" style="position:absolute;top:-10000px;width:450px;margin:0px;border-style:none" scrolling="no" marginwidth="0" marginheight="0" hspace="0" frameborder="0" width="100%"></iframe></div><div data-gapistub="true" data-onload="true" data-gapiscan="true" class="g-person" data-width="450" data-href="//plus.google.com/118255177648356108079" data-layout="landscape" data-rel="author"></div>
+<form id="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post"> 
+ <input name="cmd" value="_xclick" type="hidden"> 
+ <input name="business" value="rskusuma@yahoo.com" type="hidden"> 
+ <input name="item_name" value="Support Hayageek.com" type="hidden"> 
+ <input name="buyer_credit_promo_code" value="" type="hidden"> 
+ <input name="buyer_credit_product_category" value="" type="hidden"> 
+ <input name="buyer_credit_shipping_method" value="" type="hidden"> 
+ <input name="buyer_credit_user_address_change" value="" type="hidden"> 
+ <input name="no_shipping" value="0" type="hidden"> 
+ <input name="no_note" value="1" type="hidden"> 
+ <input name="currency_code" value="USD" type="hidden"> 
+ <input name="tax" value="0" type="hidden"> 
+ <input name="lc" value="US" type="hidden"> 
+ <input name="bn" value="PP-DonationsBF" type="hidden"> 
+ <div><input id="butt" src="jQuery%20Upload%20File%20Plugin%20Demo_files/btn_donateCC_LG.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" border="0" type="image"> </div>
+</form>	
+</div>
+</div>
+<div class="row">
+<div id="disqus_thread"><iframe verticalscrolling="no" horizontalscrolling="no" src="jQuery%20Upload%20File%20Plugin%20Demo_files/a.html" style="width: 100% ! important; border: medium none ! important; overflow: hidden ! important; height: 7282px ! important;" title="Disqus" tabindex="0" scrolling="no" allowtransparency="true" data-disqus-uid="2" id="dsq-2" frameborder="0" width="100%"></iframe><iframe style="width: 960px ! important; border: medium none ! important; overflow: hidden ! important; top: 0px ! important; min-width: 960px ! important; max-width: 960px ! important; position: fixed ! important; z-index: 2147483646 ! important; height: 29px ! important; min-height: 29px ! important; max-height: 29px ! important; display: none ! important;" title="Disqus" tabindex="0" scrolling="no" allowtransparency="true" data-disqus-uid="indicator-north" id="dsq-indicator-north" frameborder="0"></iframe><iframe style="width: 960px ! important; border: medium none ! important; overflow: hidden ! important; bottom: 0px ! important; min-width: 960px ! important; max-width: 960px ! important; position: fixed ! important; z-index: 2147483646 ! important; height: 29px ! important; min-height: 29px ! important; max-height: 29px ! important; display: none ! important;" title="Disqus" tabindex="0" scrolling="no" allowtransparency="true" data-disqus-uid="indicator-south" id="dsq-indicator-south" frameborder="0"></iframe></div>
+</div>
+
+     <!-- Footer
+      ================================================== -->
+      <hr>
+
+      <footer id="footer">
+        <p class="pull-right"><a href="#top">Back to top</a></p>
+        <div class="links">
+          <a href="http://hayageek.com/">Blog</a>
+        </div>
+      </footer>
+
+    </div><!-- /container -->
+<script src="jQuery%20Upload%20File%20Plugin%20Demo_files/jquery_002.js"></script>
+<script src="jQuery%20Upload%20File%20Plugin%20Demo_files/bootstrap.js"></script>
+
+<script src="jQuery%20Upload%20File%20Plugin%20Demo_files/jquery.js"></script>
+
+<script>	
+
+function loadSocial(){
+	
+		$.getScript('http://platform.twitter.com/widgets.js');
+		 $.getScript("http://connect.facebook.net/en_US/all.js#xfbml=1", function () {
+            FB.init({ status: true, cookie: true, xfbml: true });
+        });
+        $.getScript('https://apis.google.com/js/plusone.js',function()
+        {
+         	$(".g-plusone").each(function () {
+        		    gapi.plusone.render($(this).get(0));
+		        });
+        });
+	
+}
+	$(document).ready(function()
+	{
+
+		$('a[rel=tooltip]').tooltip({'placement': 'bottom'});
+	});
+	
+$(document).ready(function()
+{
+	$("#singleupload1").uploadFile({
+	url:"http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php"
+	});
+
+	$("#singleupload2").uploadFile({
+	url:"http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php",
+	allowedTypes:"png,gif,jpg,jpeg",
+	fileName:"myfile"
+	});
+
+
+	$("#multipleupload").uploadFile({
+	url:"http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php",
+	multiple:true,
+	fileName:"myfile"
+	});
+	
+	var uploadObj = $("#advancedUpload").uploadFile({
+	url:"http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php",
+	multiple:true,
+	autoSubmit:false,
+	fileName:"myfile",
+	formData: {"name":"Ravi","age":31},
+	maxFileSize:1024*100,
+	maxFileCount:1,
+	dynamicFormData: function()
+	{
+		var data ={ location:"INDIA"}
+		return data;
+	},
+	showStatusAfterSuccess:false,
+	dragDropStr: "<span><b>Faites glisser et déposez les fichiers</b></span>",
+    abortStr:"abandonner",
+	cancelStr:"résilier",
+	doneStr:"fait",
+	multiDragErrorStr: "Plusieurs Drag &amp; Drop de fichiers ne sont pas autorisés.",
+	extErrorStr:"n'est pas autorisé. Extensions autorisées:",
+	sizeErrorStr:"n'est pas autorisé. Admis taille max:",
+	uploadErrorStr:"Upload n'est pas autorisé"
+	});
+	$("#startUpload").click(function()
+	{
+		uploadObj.startUpload();
+	});
+	
+	var deleteuploadObj = $("#deleteFileUpload").uploadFile({url: "upload.php",
+ dragDrop: true,
+ fileName: "myfile",
+ returnType: "json",
+ showDelete: true,
+ deleteCallback: function (data, pd) {
+     for (var i = 0; i < data.length; i++) {
+         $.post("delete.php", {op: "delete",name: data[i]},
+             function (resp,textStatus, jqXHR) {
+                 //Show Message	
+                 alert("File Deleted");
+             });
+     }
+     pd.statusbar.hide(); //You choice.
+
+ }
+ });
+	
+	$("#eventsupload").uploadFile({
+	url:"http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php",
+	multiple:true,
+	fileName:"myfile",
+	onSubmit:function(files)
+	{
+		$("#eventsmessage").html($("#eventsmessage").html()+"<br/>Submitting:"+JSON.stringify(files));
+	},
+	onSuccess:function(files,data,xhr)
+	{
+		$("#eventsmessage").html($("#eventsmessage").html()+"<br/>Success for: "+JSON.stringify(data));
+		
+	},
+	afterUploadAll:function()
+	{
+		$("#eventsmessage").html($("#eventsmessage").html()+"<br/>All files are uploaded");
+		
+	
+	},
+	onError: function(files,status,errMsg)
+	{
+		$("#eventsmessage").html($("#eventsmessage").html()+"<br/>Error for: "+JSON.stringify(files));
+	}
+	});
+	
+	
+	$("#stylingupload1").uploadFile({
+	url:"http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php",
+	multiple:true,
+	fileName:"myfile",
+	showStatusAfterSuccess:false,
+	showAbort:false,
+	showDone:false,
+	});
+
+	$("#stylingupload2").uploadFile({
+	url:"http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php",
+	multiple:true,
+	fileName:"myfile",
+	showStatusAfterSuccess:false,
+	showAbort:false,
+	showDone:false,
+	uploadButtonClass:"ajax-file-upload-green"
+	});
+	
+});
+</script>	
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-37706919-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+jQuery(document).ready(function($) {
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'hayageek'; // required: replace example with your forum shortname
+		var disqus_loaded=false;
+		if($("#disqus_thread").length > 0)
+		{
+			$(window).scroll(function () 
+			{
+				if(!disqus_loaded)
+				{
+				loadSocial();
+				/* * * DON'T EDIT BELOW THIS LINE * * */
+					var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+					dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+					(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+					disqus_loaded = true;
+				}
+			});
+		}
+});
+</script>
+  
+
+<iframe style="display: none; width: 0px; height: 0px;" name="google_osd_static_frame" id="google_osd_static_frame_7484812107672"></iframe><div class=" fb_reset" id="fb-root"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe src="jQuery%20Upload%20File%20Plugin%20Demo_files/7r8gQb8MIqE.xhtml" style="border: medium none;" tabindex="-1" title="Facebook Cross Domain Communication Frame" aria-hidden="true" id="fb_xdm_frame_http" scrolling="no" allowtransparency="true" name="fb_xdm_frame_http" frameborder="0"></iframe><iframe src="jQuery%20Upload%20File%20Plugin%20Demo_files/7r8gQb8MIqE_002.xhtml" style="border: medium none;" tabindex="-1" title="Facebook Cross Domain Communication Frame" aria-hidden="true" id="fb_xdm_frame_https" scrolling="no" allowtransparency="true" name="fb_xdm_frame_https" frameborder="0"></iframe></div></div></div></body></html>
